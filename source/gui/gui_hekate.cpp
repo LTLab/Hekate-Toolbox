@@ -157,7 +157,7 @@ void GuiHekate::InitializeRegular() {
             for (auto const &autoBootEntry : m_rebootConfigs)
                 rebootNames.push_back(autoBootEntry.name);
 
-            (new ListSelector("加载Hekate配置文件", "\uE0E1 返回     \uE0E0 确认", rebootNames, currRebootEntryIndex))
+            (new ListSelector("加载Hekate配置文件", "\uE0E1 返回     \uE0E0 确定", rebootNames, currRebootEntryIndex))
                 ->setInputAction([&](u32 k, u16 selectedItem) {
                     if (k & HidNpadButton_A) {
                         currRebootEntryIndex = selectedItem;
@@ -232,21 +232,21 @@ void GuiHekate::draw() {
     Gui::drawRectangle((u32)((Gui::g_framebuffer_width - 1220) / 2), Gui::g_framebuffer_height - 73, 1220, 1, currTheme.textColor);
     Gui::drawTextAligned(fontIcons, 70, 68, currTheme.textColor, "\uE130", ALIGNED_LEFT);
     Gui::drawTextAligned(font24, 70, 58, currTheme.textColor, "        Hekate 工具箱", ALIGNED_LEFT);
-    Gui::drawTextAligned(font20, Gui::g_framebuffer_width - 50, Gui::g_framebuffer_height - 25, currTheme.textColor, "\uE0E1 返回     \uE0E0 确认", ALIGNED_RIGHT);
+    Gui::drawTextAligned(font20, Gui::g_framebuffer_width - 50, Gui::g_framebuffer_height - 25, currTheme.textColor, "\uE0E1 返回     \uE0E0 确定", ALIGNED_RIGHT);
 
     if (canReboot)
     {
         if (restrictedMode)
         {
             Gui::drawTextAligned(font24, Gui::g_framebuffer_width / 2, 150, currTheme.activatedColor, "限制模式", ALIGNED_CENTER);
-            Gui::drawTextAligned(font20, Gui::g_framebuffer_width / 2, 200, currTheme.textColor, "可选择以下两个选项之一：", ALIGNED_CENTER);
+            Gui::drawTextAligned(font20, Gui::g_framebuffer_width / 2, 200, currTheme.textColor, "你选择以下两个选项之一：", ALIGNED_CENTER);
 
             const std::string restrictedModeReason = "限制模式原因：" + errorMessage;
             Gui::drawTextAligned(font20, Gui::g_framebuffer_width / 2, Gui::g_framebuffer_height - 150, currTheme.textColor, restrictedModeReason.c_str(), ALIGNED_CENTER);
         }
         else
         {
-            Gui::drawTextAligned(font20, Gui::g_framebuffer_width / 2, 150, currTheme.textColor, "选择你想要重启任天堂Switch的Hekate配置文件 \n 请确保在执行此操作之前关闭所有打开的程序，因为这将立即重启您的设备。", ALIGNED_CENTER);
+            Gui::drawTextAligned(font20, Gui::g_framebuffer_width / 2, 150, currTheme.textColor, "选择你想要重启任天堂Switch的Hekate配置文件 \n 请确保在执行此操作之前关闭所有打开的程序，因为这将立即重新启动您的设备。", ALIGNED_CENTER);
         }
     }
     else

@@ -68,7 +68,7 @@ GuiMain::GuiMain() : Gui() {
             for (auto const &autoBootEntry : m_autoBootConfigs)
                 autobootNames.push_back(autoBootEntry.name);
 
-            (new ListSelector("Hekate 引导至", "\uE0E1 返回     \uE0E0 确认", autobootNames, currAutoBootEntryIndex))
+            (new ListSelector("Hekate 引导至", "\uE0E1 返回     \uE0E0 确定", autobootNames, currAutoBootEntryIndex))
                 ->setInputAction([&](u32 k, u16 selectedItem) {
                     if (k & HidNpadButton_A) {
                         auto hekateIni = parseOrCreateFileFixed(HEKATE_INI);
@@ -144,7 +144,7 @@ void GuiMain::draw() {
     Gui::drawRectangle((u32)((Gui::g_framebuffer_width - 1220) / 2), Gui::g_framebuffer_height - 73, 1220, 1, currTheme.textColor);
     Gui::drawTextAligned(fontIcons, 70, 68, currTheme.textColor, "\uE130", ALIGNED_LEFT);
     Gui::drawTextAligned(font24, 70, 58, currTheme.textColor, "        Hekate 工具箱", ALIGNED_LEFT);
-    Gui::drawTextAligned(font20, Gui::g_framebuffer_width - 50, Gui::g_framebuffer_height - 25, currTheme.textColor, "\uE0E1 返回     \uE0E0 确认", ALIGNED_RIGHT);
+    Gui::drawTextAligned(font20, Gui::g_framebuffer_width - 50, Gui::g_framebuffer_height - 25, currTheme.textColor, "\uE0E1 返回     \uE0E0 确定", ALIGNED_RIGHT);
     Gui::drawTextAligned(font24, Gui::g_framebuffer_width / 2, Gui::g_framebuffer_height - 130, currTheme.textColor, "按 \uE044 保存并回到主页", ALIGNED_CENTER);
 
     drawButtons();

@@ -120,7 +120,7 @@ void GuiTitleList::draw() {
     Gui::drawRectangle((u32)((Gui::g_framebuffer_width - 1220) / 2), Gui::g_framebuffer_height - 73, 1220, 1, currTheme.textColor);
     Gui::drawTextAligned(fontIcons, 70, 68, currTheme.textColor, "\uE130", ALIGNED_LEFT);
     Gui::drawTextAligned(font24, 70, 58, currTheme.textColor, "        应用覆盖设置", ALIGNED_LEFT);
-    Gui::drawTextAligned(font20, Gui::g_framebuffer_width - 50, Gui::g_framebuffer_height - 25, currTheme.textColor, "\uE0E1 返回     \uE0E0 确认", ALIGNED_RIGHT);
+    Gui::drawTextAligned(font20, Gui::g_framebuffer_width - 50, Gui::g_framebuffer_height - 25, currTheme.textColor, "\uE0E1 返回     \uE0E0 确定", ALIGNED_RIGHT);
     Gui::endDraw();
 }
 
