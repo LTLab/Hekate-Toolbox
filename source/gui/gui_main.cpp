@@ -103,7 +103,8 @@ GuiMain::GuiMain() : Gui() {
     backgroundServicesButton->adjacentButton[ADJ_RIGHT] = 3;
     backgroundServicesButton->drawAction = [&](Gui *gui, u16 x, u16 y, bool *isActivated) {
         gui->drawRectangled(x, y, 340, 80, currTheme.submenuButtonColor);
-        gui->drawTextAligned(font20, x + 37, y + 50, currTheme.textColor, "后台服务", ALIGNED_LEFT);
+        // 改为居中对齐，x坐标设为按钮宽度的一半（340/2）
+        gui->drawTextAligned(font20, x + 170, y + 50, currTheme.textColor, "后台服务", ALIGNED_CENTER);
     };
     backgroundServicesButton->inputAction = [&](u32 kdown, bool *isActivated) {
         if (kdown & HidNpadButton_A)
@@ -119,7 +120,8 @@ GuiMain::GuiMain() : Gui() {
     rebootButton->adjacentButton[ADJ_LEFT] = 2;
     rebootButton->drawAction = [&](Gui *gui, u16 x, u16 y, bool *isActivated) {
         gui->drawRectangled(x, y, 335, 80, currTheme.submenuButtonColor);
-        gui->drawTextAligned(font20, x + 55, y + 50, currTheme.textColor, "重启到Hekate", ALIGNED_LEFT);
+        // 改为居中对齐，x坐标设为按钮宽度的一半（335/2）
+        gui->drawTextAligned(font20, x + 167.5, y + 50, currTheme.textColor, "重启到Hekate", ALIGNED_CENTER);
     };
     rebootButton->inputAction = [&](u32 kdown, bool *isActivated) {
         if (kdown & HidNpadButton_A) {
