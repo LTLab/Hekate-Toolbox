@@ -105,13 +105,13 @@ GuiSysmodule::GuiSysmodule() : Gui() {
                     if (!sysmodule.second.requiresReboot) {
                         pmshellTerminateProgram(tid);
                     } else {
-                        (new MessageBox("此系统插件修改需要重启生效。\n 请重启你的switch以使用它。", MessageBox::OKAY))->show();
+                        (new MessageBox("此系统插件修改需要重启生效。\n 请重启switch以使用该功能。", MessageBox::OKAY))->show();
                     }
 
                     remove(path.str().c_str());
                 } else {
                     if (sysmodule.second.requiresReboot) {
-                        (new MessageBox("此系统插件修改需要重启生效。\n 请重启你的switch以使用它。", MessageBox::OKAY))->show();
+                        (new MessageBox("此系统插件修改需要重启生效。\n 请重启switch以使用该功能。", MessageBox::OKAY))->show();
                         FILE *fptr = fopen(path.str().c_str(), "wb+");
                         if (fptr != nullptr) fclose(fptr);
                     } else {
