@@ -1,32 +1,40 @@
-name: Release-20251117
+name: Release
 
 on:
+  push:
+    branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build_and_release:
+    name: Build and release
     runs-on: ubuntu-latest
     container: registry.cn-hangzhou.aliyuncs.com/mozt/devkita64:1.1
 
     steps:
-      - name: Checkout project
-        uses: actions/checkout@master
+      - name: Checkout latest code
+        uses: actions/checkout@v4.2.2
         with:
+          ref: master
+          clean: true
+          fetch-depth: 0
+          fetch-tags: true
           submodules: recursive
 
-      - name: Extract version from Makefile
+      - name: Setup ENV parameters
         run: |
-          VERSION_MAJOR=$(awk '/^VERSION_MAJOR :=/ {print $3}' Makefile)
-          VERSION_MINOR=$(awk '/^VERSION_MINOR :=/ {print $3}' Makefile)
-          VERSION_MICRO=$(awk '/^VERSION_MICRO :=/ {print $3}' Makefile)
-          APP_VERSION="${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_MICRO}"
-          echo "APP_VERSION=${APP_VERSION}" >> $GITHUB_ENV
-          echo "tag_name=${APP_VERSION}" >> $GITHUB_ENV
-          echo "Extracted version: ${APP_VERSION}"
-          echo "Tag name: ${tag_name}"
+          VER_FILE=Makefile
+          NAME=$(awk '/^APP_TITLE/{print $3}' $VER_FILE)
+          VERSION=$(awk '/^APP_VERSION/{print $3}' $VER_FILE)
+          echo "TAG=${VERSION}" >> "${GITHUB_ENV}"
+          echo "APP_NAME=${NAME}" >> "${GITHUB_ENV}"
+          echo "RELEASE_NAME=${NAME} ${VERSION}" >> "${GITHUB_ENV}"
         shell: bash
 
-      - name: Build project
+      - name: Build
         run: |
           git config --global --add safe.directory `pwd` && \
           sudo dkp-pacman -S --noconfirm switch-freetype && \
@@ -37,18 +45,14 @@ jobs:
           ls -la *
         shell: bash
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2.0.9
         with:
-          name: HekateToolbox ${{ env.APP_VERSION }}
-          path: ./out/*.nro
-
-      - name: Upload release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./out/*.nro
-          tag: ${{ env.tag_name }}
-          release_name: Hekate Toolbox v${{ env.APP_VERSION }}
-          overwrite: true
-          file_glob: true
+          name: ${{ env.RELEASE_NAME }}
+          tag_name: ${{ env.TAG }}
+          draft: false
+          prerelease: false
+          generate_release_notes: yes
+          make_latest: true
+          files: |
+            ./SdOut/${{ env.APP_NAME }}.zip
