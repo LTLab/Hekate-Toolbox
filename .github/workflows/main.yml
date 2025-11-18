@@ -28,7 +28,10 @@ jobs:
         run: |
           VER_FILE=Makefile
           NAME=$(awk '/^TARGET/{print $3}' $VER_FILE)
-          VERSION=$(make -f $VER_FILE -pn | awk -F'= ' '/^APP_VERSION =/ {print $2; exit}')
+          VERSION_MAJOR=$(awk '/^VERSION_MAJOR :=/ {print $3}' $VER_FILE)
+          VERSION_MINOR=$(awk '/^VERSION_MINOR :=/ {print $3}' $VER_FILE)
+          VERSION_MICRO=$(awk '/^VERSION_MICRO :=/ {print $3}' $VER_FILE)
+          VERSION="${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_MICRO}"
           echo "TAG=${VERSION}" >> "${GITHUB_ENV}"
           echo "APP_NAME=${NAME}" >> "${GITHUB_ENV}"
           echo "RELEASE_NAME=${NAME} ${VERSION}" >> "${GITHUB_ENV}"
