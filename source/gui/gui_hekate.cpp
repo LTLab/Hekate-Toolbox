@@ -49,7 +49,7 @@ GuiHekate::GuiHekate() : Gui() {
             restrictedMode = true;
 
             if (model == SetSysProductModel_Iowa || model == SetSysProductModel_Hoag || model == SetSysProductModel_Calcio || model == SetSysProductModel_Aula) {
-                errorMessage = "不支持的switch型号 (Mariko)        gzk_47汉化";
+                errorMessage = "不支持的switch型号 (Mariko)";
             }
             else {
                 errorMessage = "未知的switch型号";

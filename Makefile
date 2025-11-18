@@ -35,7 +35,7 @@ VERSION_MINOR := 0
 VERSION_MICRO := 5
 
 APP_TITLE	:=	Hekate Toolbox
-APP_AUTHOR	:=	WerWolv, cathery, gzk_47汉化
+APP_AUTHOR	:=	WerWolv
 APP_VERSION	:=	${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_MICRO}
 
 TARGET		:=	HekateToolbox
