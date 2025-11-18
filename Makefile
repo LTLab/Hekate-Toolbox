@@ -161,9 +161,9 @@ $(CUSTOM_LIBS):
 $(BUILD):	$(CUSTOM_LIBS)
 	@[ -d $@ ] || mkdir -p $@ $(BUILD) $(OUTDIR)
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@mkdir -p $(CURDIR)/SdOut/switch/HekateToolbox
-	@cp $(OUTPUT).nro $(CURDIR)/SdOut/switch/HekateToolbox
-	@zip -r $(CURDIR)/SdOut/$(TARGET).zip $(CURDIR)/SdOut/switch/HekateToolbox
+	@mkdir -p $(CURDIR)/SdOut/switch/$(TARGET)
+	@cp $(OUTPUT).nro $(CURDIR)/SdOut/switch/$(TARGET)
+	@cd $(CURDIR)/SdOut && zip -r $(TARGET).zip switch
 	@echo "Packaged into $(CURDIR)/SdOut/$(TARGET).zip"
 
 #---------------------------------------------------------------------------------
